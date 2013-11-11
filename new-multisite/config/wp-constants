@@ -1,0 +1,7 @@
+/* Cache Salt */
+define( 'WP_CACHE_KEY_SALT', 'example_dev' );
+
+/* Debug */
+define('WP_DEBUG', true );
+define( 'SCRIPT_DEBUG', true );
+define( 'SAVEQUERIES', true );
