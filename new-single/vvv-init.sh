@@ -15,10 +15,10 @@ if [ ! -d htdocs ]
 	# Move into htdocs to run 'wp' commands.
 	cd htdocs
 	wp core download
-	wp core config --dbname="$database" --dbuser=$dbuser --dbpass=$dbpass --extra-php < ../config/wp-constants
+	wp core config --dbname="$database" --dbuser="$dbuser" --dbpass="$dbpass" --extra-php < ../config/wp-constants
 	if [ ! $(wp core is-installed) ]
 		then
-		wp core install --url=$domain --title=$site_name --admin_user=$admin_user --admin_password=$admin_pass --admin_email=$admin_email
+		wp core install --url="$domain" --title="$site_name" --admin_user="$admin_user" --admin_password="$admin_pass" --admin_email="$admin_email"
 	fi
 	#Install all WordPress.org plugins in the org_plugins file using CLI
 	echo "Installing WordPress.org Plugins"
