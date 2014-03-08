@@ -14,11 +14,11 @@ if [ ! -d htdocs ]
 	mkdir htdocs
 	# Move into htdocs to run 'wp' commands.
 	cd htdocs
-	wp core download
-	wp core config --dbname="$database" --dbuser=$dbuser --dbpass=$dbpass --extra-php < ../config/wp-constants
-	if [ ! $(wp core is-installed) ]
+	wp core download --allow-root
+	wp core config --dbname="$database" --dbuser=$dbuser --dbpass=$dbpass --extra-php < ../config/wp-constants --allow-root
+	if [ ! $(wp core is-installed --allow-root) ]
 		then
-		wp core install --url=$domain --title=$site_name --admin_user=$admin_user --admin_password=$admin_pass --admin_email=$admin_email
+		wp core install --url=$domain --title=$site_name --admin_user=$admin_user --admin_password=$admin_pass --admin_email=$admin_email --allow-root
 	fi
 	#Install all WordPress.org plugins in the org_plugins file using CLI
 	echo "Installing WordPress.org Plugins"
@@ -28,7 +28,7 @@ if [ ! -d htdocs ]
 		do
 			if [ "#" != ${line:0:1} ]
 			then
-				wp plugin install $line
+				wp plugin install $line --allow-root
 			fi
 		done < ../config/org-plugins
 	fi
@@ -40,7 +40,7 @@ fi
 find htdocs/wp-content/ -maxdepth 2 -type l -exec rm -f {} \;
 # Next attach symlinks for eacy of our types.
 # Plugins
-echo "Linking working directory pluins"
+echo "Linking working directory plugins"
 find src/plugins/ -maxdepth 1 -mindepth 1 -exec ln -s $PWD/{} $PWD/htdocs/wp-content/plugins/ \;
 # Themes
 echo "Linking working directory themes"
