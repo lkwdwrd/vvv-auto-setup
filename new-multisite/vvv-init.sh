@@ -18,7 +18,7 @@ if [ ! -d htdocs ]
 	wp core config --dbname="$database" --dbuser=$dbuser --dbpass=$dbpass --extra-php < ../config/wp-constants --allow-root
 	if [ ! $(wp core is-installed --allow-root) ]
 		then
-		wp core install --url=$domain --title=$site_name --admin_user=$admin_user --admin_password=$admin_pass --admin_email=$admin_email --allow-root
+		wp core multisite-install --url=$domain --title=$site_name --admin_user=$admin_user --admin_password=$admin_pass --admin_email=$admin_email --allow-root
 	fi
 	#Install all WordPress.org plugins in the org_plugins file using CLI
 	echo "Installing WordPress.org Plugins"
